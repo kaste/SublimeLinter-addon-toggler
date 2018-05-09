@@ -46,4 +46,4 @@ def collect_possible_linters(view):
         text = ('Enable: ' if disabled else 'Disable: ') + name
         rv.append((action, linter_class, text))
 
-    return rv
+    return sorted(rv, key=lambda item: item[2])
