@@ -1,9 +1,13 @@
 # Hi!
 
 
-This is an addon for SublimeLinter. It adds a command to quickly enable/disable registered linters. Disabling a linter here is *global*, although the menu only shows linters that would work for the current view (to make the list shorter).
+This is an addon for SublimeLinter. It makes enabling/disabling registered linters better. 
 
-So the command is called `sublime_linter_addon_toggle_linters` and it takes no arguments.
+First it adds a hook against Package Control. So, when you disable a package using Package Control it actually unregisters this linter immediately. No need to restart anymore. This kind of disabling is *persistent*.
+
+Second, it adds a command to quickly enable/disable registered linters. Disabling a linter here is *global*, although the menu only shows linters that would work for the current view (to make the list shorter). This kind of disabling is only *in memory*.
+
+The new command is called `sublime_linter_addon_toggle_linters` and it takes no arguments.
 
 Bind it to a key e.g. 
 
