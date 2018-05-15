@@ -2,5 +2,9 @@
     {
         "caption": "SublimeLinter: Toggle Linter",
         "command": "sublime_linter_addon_toggle_linters"
-    }
+    },
+    {
+        "caption": "SublimeLinter: Toggle debug mode",
+        "command": "sublime_linter_addon_toggle_debug"
+    },
 ]

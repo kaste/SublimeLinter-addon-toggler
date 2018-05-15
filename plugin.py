@@ -50,3 +50,14 @@ def collect_possible_linters(view):
         rv.append((action, linter_class, text))
 
     return sorted(rv, key=lambda item: item[2])
+
+
+class sublime_linter_addon_toggle_debug(sublime_plugin.WindowCommand):
+    def run(self):
+        current_mode = persist.settings.get('debug')
+        next_mode = not current_mode
+
+        self.window.status_message(
+            "{} debug mode".format('Enabling' if next_mode else 'Disabling'))
+        sublime.load_settings(
+            "SublimeLinter.sublime-settings").set('debug', next_mode)
