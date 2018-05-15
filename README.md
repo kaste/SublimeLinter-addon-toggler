@@ -17,6 +17,9 @@ Bind it to a key e.g.
   },
 ```
 
+# Other
+
+Adds a command to **toggle the debug mode** of SublimeLinter. Search for "SublimeLinter: Toggle debug mode" in the command palette. The internal name of that command is `sublime_linter_addon_toggle_debug`. 
 
 # Install
 
