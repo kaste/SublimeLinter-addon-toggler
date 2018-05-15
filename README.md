@@ -1,7 +1,9 @@
 # Hi!
 
 
-This is an addon for SublimeLinter. It makes enabling/disabling registered linters better. 
+This is an addon for SublimeLinter. 
+
+## Enabling/disabling registered linters 
 
 First it adds a hook against Package Control. So, when you disable a package using Package Control it actually unregisters this linter immediately. No need to restart anymore. This kind of disabling is *persistent*.
 
@@ -17,9 +19,13 @@ Bind it to a key e.g.
   },
 ```
 
-# Other
+## Toggle debug mode
 
 Adds a command to **toggle the debug mode** of SublimeLinter. Search for "SublimeLinter: Toggle debug mode" in the command palette. The internal name of that command is `sublime_linter_addon_toggle_debug`. 
+
+## Switch lint mode
+
+Adds a command to quickly **switch the lint mode** of SublimeLinter. Search for "SublimeLinter: Switch lint mode". The command is called `sublime_linter_addon_choose_lint_mode` and it takes `lint_mode` as an *optional* argument. 
 
 # Install
 
