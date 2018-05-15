@@ -61,3 +61,39 @@ class sublime_linter_addon_toggle_debug(sublime_plugin.WindowCommand):
             "{} debug mode".format('Enabling' if next_mode else 'Disabling'))
         sublime.load_settings(
             "SublimeLinter.sublime-settings").set('debug', next_mode)
+
+
+class sublime_linter_addon_choose_lint_mode(sublime_plugin.WindowCommand):
+    def run(self, lint_mode=None):
+        if lint_mode not in ('background', 'load_save', 'manual', 'save'):
+            self.window.status_message(
+                "'{}' is not a valid lint_mode".format(lint_mode))
+            return
+
+        current_mode = persist.settings.get('lint_mode')
+        if lint_mode == current_mode:
+            self.window.status_message(
+                "Already in '{}' mode".format(lint_mode))
+            return
+
+        sublime.load_settings(
+            "SublimeLinter.sublime-settings").set('lint_mode', lint_mode)
+
+    def input(self, args):
+        if 'lint_mode' in args:
+            return None
+
+        return LintModeInputHandler()
+
+
+class LintModeInputHandler(sublime_plugin.ListInputHandler):
+    def list_items(self):
+        current_mode = persist.settings.get('lint_mode')
+        all_modes = ['background', 'load_save', 'manual', 'save']
+
+        try:
+            selected = all_modes.index(current_mode)
+        except ValueError:
+            selected = 0
+
+        return (all_modes, selected)
