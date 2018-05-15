@@ -40,7 +40,10 @@ def collect_possible_linters(view):
         if not could_lint_view:
             continue
 
-        disabled = linter_class.disabled or settings.get('disable')
+        if linter_class.disabled is not None:
+            disabled = linter_class.disabled
+        else:
+            disabled = settings.get('disable')
         action = not disabled
 
         text = ('Enable: ' if disabled else 'Disable: ') + name
