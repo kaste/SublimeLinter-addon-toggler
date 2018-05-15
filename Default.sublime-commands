@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "SublimeLinter: Toggle Linter",
+        "command": "sublime_linter_addon_toggle_linters"
+    }
+]
