@@ -4,6 +4,9 @@ import sublime_plugin
 from SublimeLinter.lint import persist, linter
 
 
+LAST_TOGGLED_LINTER_CLASS = None
+
+
 class sublime_linter_addon_toggle_linters(sublime_plugin.WindowCommand):
     def run(self):
         view = self.window.active_view()
@@ -14,21 +17,31 @@ class sublime_linter_addon_toggle_linters(sublime_plugin.WindowCommand):
             return
 
         items = [text for _, _, text in linters]
+        try:
+            selected = next(
+                i for i, (_, linter_class, _) in enumerate(linters)
+                if linter_class == LAST_TOGGLED_LINTER_CLASS
+            )
+        except StopIteration:
+            selected = -1
 
         def on_done(result):
+            global LAST_TOGGLED_LINTER_CLASS
+
             if result == -1:
                 return  # Canceled
 
             disable, linter_class, _ = linters[result]
 
             linter_class.disabled = disable
+            LAST_TOGGLED_LINTER_CLASS = linter_class
             sublime.run_command('sublime_linter_config_changed')
 
             self.window.status_message(
                 '{} {}.'.format(linter_class.name,
                                 'disabled' if disable else 'enabled'))
 
-        self.window.show_quick_panel(items, on_done)
+        self.window.show_quick_panel(items, on_done, 0, selected)
 
 
 def collect_possible_linters(view):
