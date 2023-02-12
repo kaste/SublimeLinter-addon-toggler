@@ -8,7 +8,7 @@ LAST_TOGGLED_LINTER_CLASS = None
 
 
 class sublime_linter_addon_toggle_linters(sublime_plugin.WindowCommand):
-    def run(self):
+    def run(self, persist=None):
         view = self.window.active_view()
         linters = collect_possible_linters(view)
         if not linters:
@@ -33,9 +33,22 @@ class sublime_linter_addon_toggle_linters(sublime_plugin.WindowCommand):
 
             disable, linter_class, _ = linters[result]
 
-            linter_class.disabled = disable
+            if persist == "project" and self.window.project_file_name():
+                linter_class.disabled = None
+                project_data = self.window.project_data() or {}
+                key = "SublimeLinter.linters.{}.disable".format(linter_class.name)
+                project_data.setdefault("settings", {})[key] = disable
+                self.window.set_project_data(project_data)
+                wid_to_relint = self.window.id()
+            else:
+                linter_class.disabled = disable
+                wid_to_relint = None  # `None` means *all*
+
             LAST_TOGGLED_LINTER_CLASS = linter_class
-            sublime.run_command('sublime_linter_config_changed')
+            sublime.run_command('sublime_linter_config_changed', {
+                'hint': 'relint',
+                'wid': wid_to_relint
+            })
 
             self.window.status_message(
                 '{} {}.'.format(linter_class.name,
