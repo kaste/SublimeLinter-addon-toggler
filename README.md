@@ -39,13 +39,6 @@ Switch lint mode". The command is called `sublime_linter_addon_choose_lint_mode`
 
 # Install
 
-Add this repo to `Package Control`.
-
-1. Open up the command palette (`ctrl+shift+p`), and find `Package Control: Add Repository`. Then
-enter the URL of this repo: `https://github.com/kaste/SublimeLinter-addon-toggler` in the input
-field.
-
-2. Open up the command palette again and find `Package Control: Install Package`, and just
+Open up the command palette and find `Package Control: Install Package`, and just
 search for `SublimeLinter-addon-toggler`. (just a normal install)
-
 
