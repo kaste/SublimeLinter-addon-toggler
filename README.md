@@ -7,12 +7,12 @@ This is an addon for SublimeLinter.
 
 First it adds a hook against Package Control. So, when you disable a package using Package Control
 it actually unregisters this linter immediately. No need to restart anymore. This kind of disabling
-is *persistent*.
+is *persistent* and *global*.
 
 Second, it adds a command to quickly enable/disable registered linters. The new command is called
 `sublime_linter_addon_toggle_linters` and it may optionally take an argument.
 
-Bind it to a key e.g.
+Bind it to a key, e.g.
 
 ```
   { "keys": ["ctrl+k", "ctrl+t"],
