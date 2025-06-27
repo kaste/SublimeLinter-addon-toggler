@@ -47,7 +47,8 @@ class sublime_linter_addon_toggle_linters(sublime_plugin.WindowCommand):
             LAST_TOGGLED_LINTER_CLASS = linter_class
             sublime.run_command('sublime_linter_config_changed', {
                 'hint': 'relint',
-                'wid': wid_to_relint
+                'wid': wid_to_relint,
+                'linter': [linter_class.name]
             })
 
             self.window.status_message(
